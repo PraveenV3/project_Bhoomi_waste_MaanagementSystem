@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome Home - Green Energy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Basic CSS for styling and responsiveness -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      width: 100%;
+      background-color: #0c713d; /* A dark green shade */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    /* Logo/brand name */
+    .brand {
+      font-size: 1.5rem;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    /* Navigation menu */
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url('https://via.placeholder.com/1200x600/0c713d/ffffff?text=Green+Earth+Hero+Image')
+        no-repeat center center/cover;
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero a button {
+      background-color: #fff;
+      color: #0c713d;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero a button:hover {
+      background-color: #e7e7e7;
+    }
+
+    /* Info Sections */
+    .info-sections {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 1200px;
+      padding: 0 1rem;
+    }
+
+    .info-box {
+      flex: 1 1 250px;
+      min-width: 250px;
+      max-width: 350px;
+      background-color: #f8f8f8;
+      border-radius: 5px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .info-box h3 {
+      margin-bottom: 1rem;
+      color: #0c713d;
+    }
+
+    .info-box p {
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    /* Recent Causes / Projects */
+    .recent-causes {
+      background-color: #fff;
+      padding: 3rem 1rem;
+    }
+
+    .recent-causes h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #0c713d;
+    }
+
+    .cause-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .cause-card {
+      flex: 1 1 250px;
+      min-width: 250px;
+      max-width: 350px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+      background-color: #fafafa;
+    }
+
+    .cause-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .cause-card .cause-content {
+      padding: 1rem;
+    }
+
+    .cause-card h4 {
+      margin-bottom: 0.5rem;
+      color: #0c713d;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0c713d;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navbar -->
+  <header>
+    <div class="brand">GreenEnergy</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Causes</a></li>
+        <li><a href="#">Donate</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>SAVE THE WORLD</h1>
+    <p>Planting trees and supporting green initiatives in your community can create a better planet for everyone.</p>
+    <!-- The "Get Started" button redirects users to the signup page -->
+    <a href="{% url 'signup' %}">
+      <button type="button">Get Started</button>
+    </a>
+  </section>
+
+  <!-- Info Sections -->
+  <section class="info-sections">
+    <div class="info-box">
+      <h3>Give Donation</h3>
+      <p>Support our green projects by making a donation. Every contribution counts!</p>
+    </div>
+    <div class="info-box">
+      <h3>Become Volunteer</h3>
+      <p>Join our dedicated team of volunteers and help us make an even greater impact.</p>
+    </div>
+    <div class="info-box">
+      <h3>Quick Fundraise</h3>
+      <p>Raise funds quickly and easily to support urgent environmental causes.</p>
+    </div>
+  </section>
+
+  <!-- Recent Causes or Projects -->
+  <section class="recent-causes">
+    <h2>Our Recent Causes</h2>
+    <div class="cause-cards">
+      <!-- Cause 1 -->
+      <div class="cause-card">
+        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+1" alt="Cause 1">
+        <div class="cause-content">
+          <h4>Reforestation Project</h4>
+          <p>Help us plant trees in deforested areas and restore critical habitats.</p>
+        </div>
+      </div>
+
+      <!-- Cause 2 -->
+      <div class="cause-card">
+        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+2" alt="Cause 2">
+        <div class="cause-content">
+          <h4>Clean Water Initiative</h4>
+          <p>We’re working to provide clean water solutions for communities in need.</p>
+        </div>
+      </div>
+
+      <!-- Cause 3 -->
+      <div class="cause-card">
+        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+3" alt="Cause 3">
+        <div class="cause-content">
+          <h4>Beach Cleanup</h4>
+          <p>Join us to remove plastic waste and preserve our beautiful coastlines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 GreenEnergy. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
+

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
-from .forms import SignUpForm
+from .forms import SignUpForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
+def home(request):
+    return render(request, 'users/home.html')
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
