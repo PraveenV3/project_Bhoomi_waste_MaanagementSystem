@@ -1,5 +1,6 @@
 from django.urls import path, include
-from .views import home,signup, profile, update_profile, delete_profile  # Import the signup view
+from .views import (home,signup, profile, update_profile, delete_profile, 
+                    bin_manager, risk_alerts, eco_cleanup )  # Import the signup view
 
 urlpatterns = [
     # ... other URL patterns ...
@@ -9,4 +10,7 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('profile/update/', update_profile, name='update_profile'),
     path('profile/delete/', delete_profile, name='delete_profile'),
+     path('bin-manager/', bin_manager, name='bin_manager'),  # Add this
+    path('risk-alerts/', risk_alerts, name='risk_alerts'),  # Add this
+    path('eco-cleanup/', eco_cleanup, name='eco_cleanup'),
 ]

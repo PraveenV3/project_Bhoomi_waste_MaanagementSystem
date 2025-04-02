@@ -41,3 +41,13 @@ def delete_profile(request):
         logout(request)
         return redirect('signup')
     return render(request, 'users/confirm_delete.html')
+
+@login_required
+def bin_manager(request):
+    return render(request, 'users/bin_manager.html')
+
+def risk_alerts(request):
+    return render(request, 'users/risk_alerts.html')
+
+def eco_cleanup(request):
+    return render(request, 'users/eco_cleanup.html')
