@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,21 +22,19 @@
 
     header {
       width: 100%;
-      background-color: #0c713d; /* A dark green shade */
+      background-color: #0c713d;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
     }
 
-    /* Logo/brand name */
     .brand {
       font-size: 1.5rem;
       color: #fff;
       font-weight: bold;
     }
 
-    /* Navigation menu */
     nav ul {
       list-style: none;
       display: flex;
@@ -50,16 +49,15 @@
 
     /* Hero Section */
     .hero {
-      background: url('https://via.placeholder.com/1200x600/0c713d/ffffff?text=Green+Earth+Hero+Image')
-        no-repeat center center/cover;
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      padding: 2rem;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'users/images/hero.jpg' %}") no-repeat center center/cover;
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #fff;
+        padding: 2rem;
     }
 
     .hero h1 {
@@ -238,16 +236,16 @@
     <div class="cause-cards">
       <!-- Cause 1 -->
       <div class="cause-card">
-        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+1" alt="Cause 1">
+        <img src="{% static 'users/images/cause1.jpg' %}" alt="Cause 1">
         <div class="cause-content">
-          <h4>Reforestation Project</h4>
+          <h4>Manage My Waste</h4>
           <p>Help us plant trees in deforested areas and restore critical habitats.</p>
         </div>
       </div>
 
       <!-- Cause 2 -->
       <div class="cause-card">
-        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+2" alt="Cause 2">
+        <img src="{% static 'users/images/cause2.jpg' %}" alt="Cause 2">
         <div class="cause-content">
           <h4>Clean Water Initiative</h4>
           <p>We’re working to provide clean water solutions for communities in need.</p>
@@ -256,7 +254,7 @@
 
       <!-- Cause 3 -->
       <div class="cause-card">
-        <img src="https://via.placeholder.com/400x250/0c713d/ffffff?text=Cause+3" alt="Cause 3">
+        <img src="{% static 'users/images/cause3.jpg' %}" alt="Cause 3">
         <div class="cause-content">
           <h4>Beach Cleanup</h4>
           <p>Join us to remove plastic waste and preserve our beautiful coastlines.</p>
@@ -272,4 +270,3 @@
 
 </body>
 </html>
-
