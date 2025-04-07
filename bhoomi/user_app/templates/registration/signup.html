@@ -1,16 +1,180 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100vh;
+      }
+
+    /* Left Section (Image) */
+    .left-section {
+      flex: 1;
+      background: url("{% static 'users/images/sign_up.jpeg' %}") no-repeat center center;
+      background-size: cover;
+    }
+
+      /* Right Section (Form) */
+      .right-section {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        background-color: #f9f9f9;
+      }
+
+      .form-container {
+        width: 100%;
+        max-width: 350px;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      }
+
+      .logo {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #78ab46; /* A green tone */
+        margin-bottom: 1rem;
+      }
+
+      .form-header {
+        margin-bottom: 2rem;
+      }
+
+      .form-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .form-header p {
+        font-size: 0.9rem;
+        color: #777;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      form .form-group {
+        margin-bottom: 1rem;
+      }
+
+      form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      form input[type="text"],
+      form input[type="email"],
+      form input[type="password"] {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .submit-btn {
+        background-color:rgb(83, 208, 48);
+        color: #fff;
+        border: none;
+        padding: 0.75rem;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        background-color: #6a993d;
+      }
+
+      .signup-footer {
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .signup-footer a {
+        color: #78ab46;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .signup-footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+        .left-section {
+          height: 40vh;
+        }
+        .right-section {
+          height: 60vh;
+        }
+      }
+    </style>
 </head>
 <body>
-    <h2>Sign Up</h2>
-    <form method="post">
+
+<div class="container">
+  <!-- Left section with background image -->
+  <div class="left-section"></div>
+
+  <!-- Right section with signup form -->
+  <div class="right-section">
+    <div class="form-container">
+      <!-- Logo / Brand name -->
+      <div class="logo">BHOOMI</div>
+
+      <!-- Header text -->
+      <div class="form-header">
+        <h2>Hello, Create Account</h2>
+        <p>Sign up to manage your account.</p>
+      </div>
+
+      <!-- Django form -->
+      <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
-    <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+
+        <button type="submit" class="submit-btn">Sign Up</button>
+      </form>
+
+      <div class="signup-footer">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

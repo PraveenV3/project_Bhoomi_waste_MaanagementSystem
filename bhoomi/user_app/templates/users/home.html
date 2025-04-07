@@ -152,46 +152,43 @@
     /* Adjustments for about_us */ 
     .about_us {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 50vh;
-      width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-
-    .about_us .left {
-      width: 40%;
-      height: 100%;
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'users/images/about_us_bg.jpg' %}") no-repeat center center/cover;
-      color: #fff;
-      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       align-items: center;
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: url("{% static 'users/images/green_energy.jpeg' %}") no-repeat center center/cover;
+      background-size: cover;
+      color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       text-align: center;
-      padding: 1rem;
-      margin-right: 5%;
     }
 
-    .about_us .left p {
-      font-size: 1.2rem;
+    .about_us_text {
+      flex: 1 1 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better readability */
+      padding: 1rem;
+      border-radius: 5px;
+    }
+
+    .about_us_text h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .about_us_text p {
+      font-size: 1.1rem;
       line-height: 1.6;
     }
 
-    .about_us .right {
-      width: 55%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 5%;
-    }
-
-    .about_us .right img {
-      width: calc((100% - 15%) / 4); /* Divide space for 4 images with equal gaps */
-      height: auto;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    @media (max-width: 768px) {
+      .about_us {
+      flex-direction: column;
+      text-align: center;
+      }
     }
 
     /* Footer */
@@ -279,7 +276,7 @@ font-size: 2.5rem; color: #004d00;">ABOUT US</h2>
 
 <!-- About Us Section -->
 <section class="about_us">
-  <img src="{% static 'users/icons/green_energy.jpg' %}" alt="Green Energy" class="about_us_image">
+  <img src="{% static 'users/images/green_energy.jpeg' %}" alt="Green Energy" class="about_us_image">
   <div class="about_us_text">
     <h3>About Us</h3>
     <p>We are committed to promoting green energy and sustainable practices in our community. Our mission is to create a cleaner, greener planet for future generations.</p>

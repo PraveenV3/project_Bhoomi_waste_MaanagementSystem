@@ -1,16 +1,210 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Container for background and form */
+    .container {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+    }
+
+    /* Left Section: Background Image */
+    .left-section {
+      flex: 3;
+      background: url("{% static 'users/images/log_in.jpeg' %}") no-repeat center center;
+      background-size: cover;
+    }
+
+    /* Red Section on the Right */
+    .right-section {
+      flex: 1;
+      background-color: rgb(83, 208, 48); /* Adjust red color as needed */
+      position: relative;
+    }
+
+    /* White Card for Login Form */
+    .login-card {
+      position: absolute;
+      top: 50%;
+      left: -20%;
+      transform: translateY(-50%);
+      width: 80%;
+      max-width: 350px;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Icons + Form Heading */
+    .login-card h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .login-card .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .login-card label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .forgot-password {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      text-align: right;
+      width: 100%;
+    }
+    .forgot-password a {
+      color: rgb(83, 208, 48);
+      text-decoration: none;
+    }
+
+    /* Login Button */
+    .login-btn {
+      width: 100%;
+      background-color: rgb(83, 208, 48);
+      color: #fff;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: rgb(83, 208, 48);
+    }
+
+    /* Sign Up Button */
+    .signup-btn {
+      width: 100%;
+      background-color: transparent;
+      color: rgb(83, 208, 48);
+      padding: 0.75rem;
+      border: 2px solid rgb(83, 208, 48);
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s ease;
+    }
+    .signup-btn:hover {
+      background-color:rgb(83, 208, 48);
+      color: #fff;
+    }
+
+    /* Footer Link */
+    .footer-text {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    .footer-text a {
+      color: #d90000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .footer-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-section {
+        flex: none;
+        height: 40vh;
+      }
+      .right-section {
+        flex: none;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .login-card {
+        position: static;
+        margin: 0 auto;
+        transform: none;
+        left: 0;
+        top: 0;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="{% url 'signup' %}">Register here</a>.</p>
+  <div class="container">
+    <!-- Left: Airplane Background -->
+    <div class="left-section"></div>
+
+    <!-- Right: Red Background + Form Card -->
+    <div class="right-section">
+      <div class="login-card">
+        <h2>Login</h2>
+        
+        <!-- Django Form -->
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+
+          <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">LOGIN</button>
+        </form>
+
+        <!-- Sign Up Button -->
+        <button class="signup-btn" onclick="window.location.href='{% url 'signup' %}'">
+          SIGN UP
+        </button>
+        
+        <!-- Alternate Footer Link (optional) -->
+        <!--
+        <div class="footer-text">
+          <p>Don't have an account? <a href="{% url 'signup' %}">Register here</a>.</p>
+        </div>
+        -->
+      </div>
+    </div>
+  </div>
 </body>
 </html>
+
