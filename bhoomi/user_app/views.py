@@ -49,5 +49,6 @@ def bin_manager(request):
 def risk_alerts(request):
     return render(request, 'users/risk_alerts.html')
 
+@login_required
 def eco_cleanup(request):
     return render(request, 'users/eco_cleanup.html')
