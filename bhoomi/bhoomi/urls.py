@@ -19,6 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('user_app.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),  # for login/logout
+     path('admin_app/', include('admin_app.urls')),  # Custom admin dashboard paths
+    path('', include('user_app.urls')),  # Include URLs from user_app
+    path('accounts/', include('django.contrib.auth.urls')),  # For login/logout
+    
 ]

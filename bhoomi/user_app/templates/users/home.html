@@ -5,9 +5,20 @@
   <meta charset="UTF-8" />
   <title>Welcome Home - Green Energy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Basic CSS for styling and responsiveness -->
   <style>
+    :root {
+      --primary-green: #4CAF50;
+      --dark-green: #2E7D32;
+      --light-green: #8BC34A;
+      --earth-brown: #795548;
+      --cream: #FFF8E1;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -15,11 +26,13 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       color: #333;
-      overflow-x: hidden;
+      background-color: #f9f9f9;
+      line-height: 1.6;
     }
 
+    /* Header */
     header {
       width: 100%;
       background-color: #0c713d;
@@ -33,6 +46,7 @@
       font-size: 1.5rem;
       color: #fff;
       font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
     }
 
     nav ul {
@@ -49,146 +63,120 @@
 
     /* Hero Section */
     .hero {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{% static 'users/images/hero.jpg' %}") no-repeat center center/cover;
-        min-height: 70vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        color: #fff;
-        padding: 2rem;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                  url('{% static "users/images/game_bg.jpg" %}');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 0 2rem;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
       margin-bottom: 1rem;
-      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     .hero p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin-bottom: 2rem;
     }
 
-    .hero a button {
-      background-color: #fff;
-      color: #0c713d;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-
-    .hero a button:hover {
-      background-color: #e7e7e7;
-    }
-
-    /* Info Sections */
-    .info-sections {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      margin: 3rem auto;
-      max-width: 1200px;
-      padding: 0 1rem;
-    }
-
-    .info-box {
-      flex: 1 1 250px;
-      min-width: 250px;
-      max-width: 350px;
-      border: 1px solid #00802b;
-      border-radius: 5px;
-      background-color: #e6ffee;
-      box-shadow: 0 2px 5px #003310;
-      padding: 1.5rem;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-    }
-
-    .info-box .info-icon {
-      height: 150px;
-      margin-bottom: 1rem; /* Add spacing below the icon */
-    }
-
-    .info-box h3 {
-      margin-bottom: 1rem;
-      color: #0c713d;
-    }
-
-    .info-box p {
-      font-size: 0.95rem;
-      line-height: 1.4;
-      margin-bottom: 1rem;
-    }
-
-    .popup {
-      display: none;
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #fff;
-      color: #333;
-      padding: 0.5rem 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      z-index: 10;
-      white-space: nowrap;
-    }
-
-    .info-box:hover .popup {
-      display: block;
-    }
-
-    /* Adjustments for about_us */ 
-    .about_us {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
+    /* Main Content */
+    .container {
       max-width: 1200px;
       margin: 2rem auto;
-      padding: 2rem;
-      background: url("{% static 'users/images/green_energy.jpeg' %}") no-repeat center center/cover;
-      background-size: cover;
-      color: #fff;
+      padding: 0 2rem;
+    }
+
+    /* Activity Cards */
+    .activity-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .card {
+      background: white;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .about_us_text {
-      flex: 1 1 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background for better readability */
-      padding: 1rem;
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img {
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      color: var(--dark-green);
+      margin-bottom: 0.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary-green);
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
       border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      margin-top: 1rem;
     }
 
-    .about_us_text h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #fff;
+    .btn:hover {
+      background: var(--dark-green);
     }
 
-    .about_us_text p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-      .about_us {
-      flex-direction: column;
+    /* Stats Section */
+    .stats {
+      background: var(--cream);
+      padding: 3rem 0;
       text-align: center;
-      }
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      margin: 1rem;
+      padding: 1.5rem;
+      min-width: 200px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-green);
+      margin-bottom: 0.5rem;
     }
 
     /* Footer */
@@ -200,21 +188,24 @@
       position: relative;
       bottom: 0;
       width: 100%;
-      height: 25hv; /* Footer takes up 25% of the viewport height */
     }
-
 
     footer p {
       font-size: 0.9rem;
     }
 
-    /* Responsive Adjustments */
+    /* Responsive Design */
     @media (max-width: 768px) {
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
+      
       .hero p {
         font-size: 1rem;
+      }
+      
+      .activity-cards {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -237,56 +228,72 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <h1>SAVE THE WORLD</h1>
-    <p>Planting trees and supporting green initiatives in your community can create a better planet for everyone.</p>
-    <!-- The "Get Started" button redirects users to the signup page -->
-    <a href="{% url 'signup' %}">
-      <button type="button">Get Started</button>
-    </a>
+    <h1>Welcome to BHOOMI</h1>
+    <p>Join us in our mission to create a cleaner, greener planet through community efforts.</p>
+    <a href="{% url 'signup' %}" class="btn">Get Started</a>
   </section>
-<h2 style="text-align: center; font-weight: bold; 
-padding: 1rem; margin-top: 2rem; font-size: 36px; 
-font-size: 2.5rem; color: #004d00;">OUR SERVICES</h2>
 
-<!-- Info Sections -->
-<section class="info-sections">
-    <div class="info-box" onclick="window.location.href='{% url 'bin_manager' %}'" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
-      <img src="{% static 'users/icons/bin_icon.png' %}" alt="Bin Icon" class="info-icon">
-      <h3>Bin Manager</h3>
-      <p>Support our green projects by making a donation. Every contribution counts!</p>
-      <div class="popup">Manage bins effectively for a cleaner environment.</div>
-    </div>
-    <div class="info-box" onclick="window.location.href='{% url 'risk_alerts' %}'" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
-      <img src="{% static 'users/icons/risk_icon.png' %}" alt="Risk Alert Icon" class="info-icon">
-      <h3>Risk Alerts</h3>
-      <p>Join our dedicated team of volunteers and help us make an even greater impact.</p>
-      <div class="popup">Stay informed about environmental risks.</div>
-    </div>
-    <div class="info-box" onclick="window.location.href='{% url 'eco_cleanup' %}'" onmouseover="showPopup(this)" onmouseout="hidePopup(this)">
-      <img src="{% static 'users/icons/trasher_icon.png' %}" alt="Eco Cleanup Icon" class="info-icon">
-      <h3>Eco Cleanup Crew</h3>
-      <p>Raise funds quickly and easily to support urgent environmental causes.</p>
-      <div class="popup">Join the cleanup crew for a greener planet.</div>
-    </div>
-</section>
+  <!-- Main Content -->
+  <div class="container">
+    <h2 style="text-align: center; margin: 2rem 0; color: var(--dark-green);">Our Services</h2>
+    
+    <div class="activity-cards">
+      <!-- Bin Manager -->
+      <div class="card">
+        <div class="card-img" style="background-image: url('{% static "users/images/game/image_01.png" %}')"></div>
+        <div class="card-content">
+          <h3>Bin Manager</h3>
+          <p>Manage bins effectively for a cleaner environment.</p>
+          <a href="{% url 'bin_manager' %}" class="btn">Manage Bins</a>
+        </div>
+      </div>
 
-<h2 style="text-align: center; font-weight: bold; 
-padding: 1rem; margin-top: 2rem; font-size: 36px; 
-font-size: 2.5rem; color: #004d00;">ABOUT US</h2>
+      <!-- Risk Alerts -->
+      <div class="card">
+        <div class="card-img" style="background-image: url('{% static "users/images/game/image_06.png" %}')"></div>
+        <div class="card-content">
+          <h3>Risk Alerts</h3>
+          <p>Stay informed about environmental risks in your area.</p>
+          <a href="{% url 'risk_alerts' %}" class="btn">View Alerts</a>
+        </div>
+      </div>
 
-<!-- About Us Section -->
-<section class="about_us">
-  <img src="{% static 'users/images/green_energy.jpeg' %}" alt="Green Energy" class="about_us_image">
-  <div class="about_us_text">
-    <h3>About Us</h3>
-    <p>We are committed to promoting green energy and sustainable practices in our community. Our mission is to create a cleaner, greener planet for future generations.</p>
+      <!-- Eco Cleanup -->
+      <div class="card">
+        <div class="card-img" style="background-image: url('{% static "users/images/option_bg.jpg" %}')"></div>
+        <div class="card-content">
+          <h3>Eco Cleanup</h3>
+          <p>Join the cleanup crew for a greener planet.</p>
+          <a href="{% url 'eco_cleanup' %}" class="btn">Join Now</a>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number">1,258</div>
+        <div class="stat-label">Active Volunteers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5,327</div>
+        <div class="stat-label">Bins Managed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">87</div>
+        <div class="stat-label">Cleanup Events</div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 GreenEnergy. All Rights Reserved.</p>
+    <p>&copy; 2025 BHOOMI. All Rights Reserved.</p>
   </footer>
 
-  
+  <script src="{% static 'users/js/popup.js' %}"></script>
+  <script src="{% static 'users/js/3d_viewer.js' %}"></script>
+</body>
 </html>

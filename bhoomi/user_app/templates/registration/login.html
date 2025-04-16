@@ -3,183 +3,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Login | BHOOMI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary-green: #4CAF50;
+      --dark-green: #2E7D32;
+      --light-green: #8BC34A;
+      --earth-brown: #795548;
+      --cream: #FFF8E1;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body, html {
       width: 100%;
       height: 100%;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
     }
 
-    /* Container for background and form */
-    .container {
+    .login-container {
       display: flex;
-      flex-direction: row;
-      width: 100%;
-      height: 100vh;
-      position: relative;
+      min-height: 100vh;
     }
 
-    /* Left Section: Background Image */
-    .left-section {
-      flex: 3;
-      background: url("{% static 'users/images/log_in.jpeg' %}") no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    /* Red Section on the Right */
-    .right-section {
+    .login-hero {
       flex: 1;
-      background-color: rgb(83, 208, 48); /* Adjust red color as needed */
-      position: relative;
-    }
-
-    /* White Card for Login Form */
-    .login-card {
-      position: absolute;
-      top: 50%;
-      left: -20%;
-      transform: translateY(-50%);
-      width: 80%;
-      max-width: 350px;
-      background-color: #fff;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url("{% static 'users/images/log_in.jpeg' %}") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      color: white;
     }
 
-    /* Icons + Form Heading */
+    .login-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .login-hero p {
+      font-size: 1.1rem;
+      max-width: 500px;
+    }
+
+    .login-form-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      background-color: var(--cream);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 2.5rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+
     .login-card h2 {
       text-align: center;
-      margin-bottom: 1rem;
-      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: var(--dark-green);
+      font-family: 'Montserrat', sans-serif;
     }
 
-    .login-card .form-group {
-      margin-bottom: 1rem;
+    .form-group {
+      margin-bottom: 1.5rem;
     }
 
-    .login-card label {
+    .form-group label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: 500;
+      color: #555;
     }
 
-    .login-card input[type="text"],
-    .login-card input[type="password"] {
+    .form-group input {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      padding: 0.8rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--light-green);
     }
 
     .forgot-password {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
       text-align: right;
-      width: 100%;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
     }
+
     .forgot-password a {
-      color: rgb(83, 208, 48);
+      color: var(--primary-green);
       text-decoration: none;
-    }
-
-    /* Login Button */
-    .login-btn {
-      width: 100%;
-      background-color: rgb(83, 208, 48);
-      color: #fff;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: background-color 0.3s ease;
-    }
-    .login-btn:hover {
-      background-color: rgb(83, 208, 48);
-    }
-
-    /* Sign Up Button */
-    .signup-btn {
-      width: 100%;
-      background-color: transparent;
-      color: rgb(83, 208, 48);
-      padding: 0.75rem;
-      border: 2px solid rgb(83, 208, 48);
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 1rem;
-      transition: 0.3s ease;
-    }
-    .signup-btn:hover {
-      background-color:rgb(83, 208, 48);
-      color: #fff;
-    }
-
-    /* Footer Link */
-    .footer-text {
-      text-align: center;
-      margin-top: 1rem;
       font-size: 0.9rem;
+      transition: color 0.3s ease;
     }
-    .footer-text a {
-      color: #d90000;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .footer-text a:hover {
+
+    .forgot-password a:hover {
+      color: var(--dark-green);
       text-decoration: underline;
     }
 
-    /* Responsive Adjustments */
+    .login-btn {
+      width: 100%;
+      background-color: var(--primary-green);
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-btn:hover {
+      background-color: var(--dark-green);
+    }
+
+    .signup-btn {
+      width: 100%;
+      background-color: transparent;
+      color: var(--primary-green);
+      padding: 0.8rem;
+      border: 2px solid var(--primary-green);
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background-color: var(--primary-green);
+      color: white;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 1.5rem 0;
+      color: #999;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider::before {
+      margin-right: 1rem;
+    }
+
+    .divider::after {
+      margin-left: 1rem;
+    }
+
     @media (max-width: 768px) {
-      .container {
+      .login-container {
         flex-direction: column;
       }
-      .left-section {
-        flex: none;
-        height: 40vh;
+
+      .login-hero {
+        padding: 3rem 1.5rem;
+        text-align: center;
       }
-      .right-section {
-        flex: none;
-        height: 60vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+      .login-hero h1 {
+        font-size: 2rem;
       }
-      .login-card {
-        position: static;
-        margin: 0 auto;
-        transform: none;
-        left: 0;
-        top: 0;
+
+      .login-form-container {
+        padding: 2rem 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Left: Airplane Background -->
-    <div class="left-section"></div>
+  <div class="login-container">
+    <!-- Hero Section -->
+    <div class="login-hero">
+      <h1>Welcome Back</h1>
+      <p>Login to continue your journey towards a cleaner, greener planet with BHOOMI.</p>
+    </div>
 
-    <!-- Right: Red Background + Form Card -->
-    <div class="right-section">
+    <!-- Login Form -->
+    <div class="login-form-container">
       <div class="login-card">
         <h2>Login</h2>
         
-        <!-- Django Form -->
         <form method="post">
           {% csrf_token %}
           {{ form.as_p }}
@@ -191,17 +228,11 @@
           <button type="submit" class="login-btn">LOGIN</button>
         </form>
 
-        <!-- Sign Up Button -->
+        <div class="divider">or</div>
+
         <button class="signup-btn" onclick="window.location.href='{% url 'signup' %}'">
-          SIGN UP
+          CREATE NEW ACCOUNT
         </button>
-        
-        <!-- Alternate Footer Link (optional) -->
-        <!--
-        <div class="footer-text">
-          <p>Don't have an account? <a href="{% url 'signup' %}">Register here</a>.</p>
-        </div>
-        -->
       </div>
     </div>
   </div>

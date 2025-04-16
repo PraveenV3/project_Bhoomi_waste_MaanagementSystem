@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from .forms import SignUpForm, ProfileUpdateForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 
 def home(request):
     return render(request, 'users/home.html')
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -23,6 +25,7 @@ def signup(request):
 @login_required
 def profile(request):
     return render(request, 'users/profile.html', {'user': request.user})
+
 @login_required
 def update_profile(request):
     if request.method == 'POST':
@@ -52,3 +55,18 @@ def risk_alerts(request):
 @login_required
 def eco_cleanup(request):
     return render(request, 'users/eco_cleanup.html')
+
+@login_required
+def collector_profile(request):
+    return render(request, 'users/game/collector_profile.html')
+
+# Check if user is admin
+def is_admin(user):
+    return user.is_staff
+
+# View for admin dashboard
+@login_required
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    users = User.objects.all()
+    return render(request, 'admin/admin_dashboard.html', {'users': users})
