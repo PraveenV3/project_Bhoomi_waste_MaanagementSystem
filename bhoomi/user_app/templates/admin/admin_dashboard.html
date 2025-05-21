@@ -1,32 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-</head>
-<body>
+{% extends "base.html" %} <!-- Adjust if you have a base template -->
+
+{% block content %}
     <h1>Admin Dashboard</h1>
     <h2>Registered Users</h2>
-
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Is Staff</th>
-                <th>Date Joined</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.is_staff }}</td>
-                <td>{{ user.date_joined }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.username }} - {{ user.email }}</li>
+        {% empty %}
+            <li>No registered users found.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

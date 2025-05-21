@@ -8,7 +8,21 @@
     <h2>Update Profile</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.username.label_tag }}<br>
+        {{ form.username }}<br><br>
+
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}<br><br>
+
+        {{ form.contact_number.label_tag }}<br>
+        {{ form.contact_number }}<br><br>
+
+        {{ form.district.label_tag }}<br>
+        {{ form.district }}<br><br>
+
+        {{ form.province.label_tag }}<br>
+        {{ form.province }}<br><br>
+
         <button type="submit">Update</button>
     </form>
     <a href="{% url 'profile' %}">Back to Profile</a>

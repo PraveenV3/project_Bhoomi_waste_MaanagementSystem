@@ -164,7 +164,26 @@
       <!-- Django form -->
       <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.username.label_tag }}<br>
+        {{ form.username }}<br><br>
+
+        {{ form.email.label_tag }}<br>
+        {{ form.email }}<br><br>
+
+        {{ form.password1.label_tag }}<br>
+        {{ form.password1 }}<br><br>
+
+        {{ form.password2.label_tag }}<br>
+        {{ form.password2 }}<br><br>
+
+        {{ form.contact_number.label_tag }}<br>
+        {{ form.contact_number }}<br><br>
+
+        {{ form.district.label_tag }}<br>
+        {{ form.district }}<br><br>
+
+        {{ form.province.label_tag }}<br>
+        {{ form.province }}<br><br>
 
         <button type="submit" class="submit-btn">Sign Up</button>
       </form>

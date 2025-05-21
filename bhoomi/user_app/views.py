@@ -24,7 +24,12 @@ def signup(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html', {'user': request.user})
+    user = request.user
+    try:
+        profile = user.userprofile
+    except:
+        profile = None
+    return render(request, 'users/profile.html', {'user': user, 'profile': profile})
 
 @login_required
 def update_profile(request):
@@ -54,19 +59,28 @@ def risk_alerts(request):
 
 @login_required
 def eco_cleanup(request):
-    return render(request, 'users/eco_cleanup.html')
+    user = request.user
+    try:
+        profile = user.userprofile
+    except UserProfile.DoesNotExist:
+        profile = None
+    return render(request, 'users/eco_cleanup.html', {'profile': profile})
 
 @login_required
 def collector_profile(request):
     return render(request, 'users/game/collector_profile.html')
 
-# Check if user is admin
-def is_admin(user):
-    return user.is_staff
+# Define a custom decorator to check for superuser status.
+def superuser_required(view_func):
+    decorated_view_func = login_required(user_passes_test(lambda u: u.is_superuser)(view_func))
+    return decorated_view_func
 
 # View for admin dashboard
-@login_required
-@user_passes_test(is_admin)
+@superuser_required
 def admin_dashboard(request):
     users = User.objects.all()
     return render(request, 'admin/admin_dashboard.html', {'users': users})
+
+@login_required
+def game_ui(request):
+    return render(request, 'users/game/game_ui.html')

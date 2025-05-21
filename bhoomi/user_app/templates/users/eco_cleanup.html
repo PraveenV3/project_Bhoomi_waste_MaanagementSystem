@@ -1,13 +1,579 @@
-<!-- filepath: d:\gitRep\project_Bhoomi_waste_MaanagementSystem\bhoomi\user_app\templates\users\game\collector_profile.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collector Profile</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eco Profile - {{ request.user.username }}</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;900&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* prevent scrolling */
+        }
+        body {
+            min-height: 100vh;
+            min-width: 100vw;
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0ffe0 0%, #b2f7ef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Animated floating shapes background */
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            animation: float 12s infinite alternate;
+            z-index: 0;
+        }
+        .bg-shape1 { width: 320px; height: 320px; background: #32cd32; top: -80px; left: -80px; animation-delay: 0s;}
+        .bg-shape2 { width: 220px; height: 220px; background: #228b22; bottom: -60px; right: -60px; animation-delay: 2s;}
+        .bg-shape3 { width: 140px; height: 140px; background: #00b894; top: 60%; left: 70%; animation-delay: 4s;}
+        @keyframes float {
+            0% { transform: translateY(0) scale(1);}
+            100% { transform: translateY(-30px) scale(1.08);}
+        }
+        /* Glassmorphism card */
+        .profile-container {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 900px;
+            max-width: 96vw;
+            height: 600px;
+            max-height: 96vh;
+            background: rgba(255,255,255,0.85);
+            border-radius: 32px;
+            box-shadow: 0 8px 40px 0 rgba(34, 139, 34, 0.18), 0 1.5px 8px #32cd3244;
+            border: 2.5px solid #32cd32;
+            display: grid;
+            grid-template-columns: 1fr 2.2fr;
+            gap: 0;
+            overflow: hidden;
+            z-index: 2;
+        }
+        .avatar-section {
+            background: linear-gradient(135deg, #e6f2e6 60%, #b2f7ef 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 32px;
+            border-bottom-left-radius: 32px;
+            padding: 0 24px;
+            position: relative;
+        }
+        .avatar-section img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 6px solid #32cd32;
+            object-fit: cover;
+            box-shadow: 0 0 32px #32cd32, 0 2px 16px #228b22;
+            margin-bottom: 18px;
+            background: #fff;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .avatar-section img:hover {
+            transform: scale(1.08) rotate(-3deg);
+            box-shadow: 0 0 40px #32cd32, 0 4px 24px #228b22;
+        }
+        .username {
+            font-size: 2.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: #228b22;
+            letter-spacing: 1.5px;
+            text-shadow: 0 2px 12px #a9d5a9;
+            margin-bottom: 12px;
+        }
+        .profile-actions {
+            margin-top: 10px;
+        }
+        .profile-actions button {
+            background: linear-gradient(90deg, #32cd32 0%, #228b22 100%);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 10px 28px;
+            font-size: 1.08rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #228b2255;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .profile-actions button:hover {
+            background: linear-gradient(90deg, #228b22 0%, #32cd32 100%);
+            transform: translateY(-2px) scale(1.06);
+        }
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+            overflow: hidden;
+            padding: 32px 32px 24px 32px;
+            background: rgba(255,255,255,0.7);
+        }
+        .stats-section {
+            background: rgba(230,242,230,0.95);
+            border-radius: 18px;
+            padding: 18px 24px 10px 24px;
+            box-shadow: 0 2px 12px #228b2233;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        .stats-section h2 {
+            margin-top: 0;
+            color: #228b22;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #32cd32;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .stat-list {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            background: #c8e6c9;
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 6px #228b2211;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .stat-item i {
+            font-size: 2rem;
+            color: #228b22;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 0.95rem;
+            color: #2e7d32;
+            font-weight: 600;
+        }
+        .stat-value {
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #145214;
+        }
+        .achievements {
+            margin-top: 6px;
+        }
+        .achievements h3 {
+            color: #2e7d32;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+        }
+        .achievement-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .achievement {
+            background: linear-gradient(90deg, #32cd32 0%, #228b22 100%);
+            color: #fff;
+            padding: 7px 14px;
+            border-radius: 18px;
+            font-weight: 600;
+            font-size: 0.98rem;
+            box-shadow: 0 2px 8px #228b2244;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: transform 0.15s;
+        }
+        .achievement i {
+            font-size: 1.1rem;
+        }
+        .achievement:hover {
+            transform: scale(1.09) rotate(-2deg);
+            box-shadow: 0 4px 16px #32cd32aa;
+        }
+        .badges-section {
+            background: rgba(230,242,230,0.95);
+            border-radius: 18px;
+            padding: 16px 16px 10px 16px;
+            margin-top: 10px;
+            box-shadow: 0 2px 12px #228b2211;
+            overflow-x: auto;
+        }
+        .badges-section h2 {
+            color: #2e7d32;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .badge-item {
+            background: linear-gradient(90deg, #228b22 0%, #32cd32 100%);
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.98rem;
+            box-shadow: 0 2px 8px #228b2244;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            min-width: 110px;
+            margin-bottom: 6px;
+            transition: transform 0.15s;
+        }
+        .badge-item i {
+            font-size: 1.2rem;
+        }
+        .badge-earned {
+            border: 2px solid #32cd32;
+            box-shadow: 0 0 10px #32cd3288;
+        }
+        .badge-locked {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+        /* Floating Action Button for Tasks */
+        #toggle-tasks-btn {
+            position: absolute;
+            bottom: 32px;
+            right: 40px;
+            z-index: 10;
+            background: linear-gradient(90deg, #32cd32 0%, #228b22 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 62px;
+            height: 62px;
+            box-shadow: 0 4px 16px #228b2244;
+            cursor: pointer;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+        #toggle-tasks-btn:hover {
+            background: linear-gradient(90deg, #228b22 0%, #32cd32 100%);
+            transform: scale(1.08);
+        }
+        /* Tasks Modal */
+        .tasks-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(34,139,34,0.13);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .tasks-section {
+            background: #e6f2e6;
+            border-radius: 18px;
+            padding: 28px 32px;
+            box-shadow: 0 4px 24px #228b2211;
+            min-width: 340px;
+            max-width: 90vw;
+            max-height: 80vh;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow-y: auto;
+            position: relative;
+        }
+        .tasks-section h2 {
+            color: #2e7d32;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.18rem;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .task-item {
+            background: #c8e6c9;
+            border-radius: 10px;
+            padding: 12px 16px;
+            min-width: 220px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.01rem;
+            color: #145214;
+            font-weight: 600;
+            box-shadow: 0 1px 6px #228b2211;
+        }
+        .task-item i {
+            color: #32cd32;
+            font-size: 1.2rem;
+        }
+        .task-points {
+            margin-left: auto;
+            color: #2e7d32;
+            font-weight: 700;
+            font-size: 1.08rem;
+        }
+        .close-modal {
+            position: absolute;
+            top: 12px; right: 18px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #228b22;
+            cursor: pointer;
+        }
+        @media (max-width: 900px) {
+            .profile-container {
+                width: 98vw;
+                height: 98vh;
+                grid-template-columns: 1fr;
+                grid-template-rows: 1.1fr 2fr;
+                border-radius: 18px;
+            }
+            .avatar-section {
+                border-radius: 18px 18px 0 0;
+                padding: 18px 0 0 0;
+            }
+            .main-content {
+                padding: 18px 8px 8px 8px;
+            }
+        }
+        @media (max-width: 600px) {
+            .profile-container {
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+            }
+            .avatar-section img {
+                width: 90px;
+                height: 90px;
+            }
+            .stat-list {
+                flex-direction: row;
+                gap: 6px;
+            }
+            .badge-list {
+                flex-direction: row;
+                gap: 6px;
+            }
+            .main-content {
+                padding: 8px 2px 2px 2px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, {{ request.user.username }}!</h1>
-    <!-- Add other profile details here -->
+    <div class="bg-shape bg-shape1"></div>
+    <div class="bg-shape bg-shape2"></div>
+    <div class="bg-shape bg-shape3"></div>
+    <div class="profile-container">
+        <div class="avatar-section">
+            <img src="{% static 'users/images/game/image_01.png' %}" alt="User Avatar" />
+            <div class="username">{{ request.user.username }}</div>
+            <div class="profile-actions">
+                <button><i class="fas fa-share-alt"></i> Share</button>
+                <button id="play-btn" class="modern-btn play-btn">Play</button>
+                <button id="exit-btn" class="modern-btn exit-btn">Exit</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="stats-section">
+                <h2>Game Stats</h2>
+                <div class="stat-list">
+                    <div class="stat-item">
+                        <i class="fas fa-layer-group"></i>
+                        <span class="stat-label">Level</span>
+                        <span class="stat-value">15</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span class="stat-label">Points</span>
+                        <span class="stat-value">2340</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-trophy"></i>
+                        <span class="stat-label">Achievements</span>
+                        <span class="stat-value">8</span>
+                    </div>
+                </div>
+                <div class="achievements">
+                    <h3>Achievements</h3>
+                    <div class="achievement-list">
+                        <div class="achievement"><i class="fas fa-leaf"></i> Eco Warrior</div>
+                        <div class="achievement"><i class="fas fa-trash-alt"></i> Trash Collector</div>
+                        <div class="achievement"><i class="fas fa-shield-alt"></i> Green Guardian</div>
+                        <div class="achievement"><i class="fas fa-recycle"></i> Recycle Master</div>
+                    </div>
+                </div>
+            </div>
+            <div class="badges-section">
+                <h2>Badges Earned</h2>
+                <div class="badge-list">
+                    {% with user_points=2340 %}
+                        <div class="badge-item {% if user_points >= 50 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-medal"></i>
+                            <span>Bronze Starter</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">50 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 100 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-certificate"></i>
+                            <span>Green Novice</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">100 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 150 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-leaf"></i>
+                            <span>Eco Enthusiast</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">150 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 200 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-recycle"></i>
+                            <span>Recycle Hero</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">200 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 250 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-tree"></i>
+                            <span>Tree Planter</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">250 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 300 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-water"></i>
+                            <span>Water Saver</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">300 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 350 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-bolt"></i>
+                            <span>Energy Saver</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">350 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 400 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-globe"></i>
+                            <span>Earth Guardian</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">400 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 450 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-star"></i>
+                            <span>Eco Champion</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">450 pts</span>
+                        </div>
+                        <div class="badge-item {% if user_points >= 500 %}badge-earned{% else %}badge-locked{% endif %}">
+                            <i class="fas fa-crown"></i>
+                            <span>Legend</span>
+                            <span style="margin-left:8px;font-size:0.95em;opacity:0.7;">500 pts</span>
+                        </div>
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+        <!-- Floating Action Button for Tasks -->
+        <button id="toggle-tasks-btn" title="Show Tasks"><i class="fas fa-tasks"></i></button>
+    </div>
+    <!-- Tasks Modal -->
+    <div class="tasks-modal" id="tasks-modal">
+        <div class="tasks-section">
+            <button class="close-modal" id="close-tasks-modal" title="Close">&times;</button>
+            <h2>Tasks to Complete for Earning Points</h2>
+            <ul class="task-list">
+                <li class="task-item"><i class="fas fa-trash"></i> Collect 10 pieces of litter <span class="task-points">+10</span></li>
+                <li class="task-item"><i class="fas fa-recycle"></i> Recycle 5 plastic bottles <span class="task-points">+15</span></li>
+                <li class="task-item"><i class="fas fa-tree"></i> Plant a tree <span class="task-points">+25</span></li>
+                <li class="task-item"><i class="fas fa-water"></i> Clean a water body <span class="task-points">+20</span></li>
+                <li class="task-item"><i class="fas fa-users"></i> Organize a cleanup event <span class="task-points">+30</span></li>
+                <li class="task-item"><i class="fas fa-bicycle"></i> Use eco-friendly transport for a week <span class="task-points">+10</span></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Modal logic for tasks
+        const toggleTasksBtn = document.getElementById('toggle-tasks-btn');
+        const tasksModal = document.getElementById('tasks-modal');
+        const closeTasksModal = document.getElementById('close-tasks-modal');
+        toggleTasksBtn.addEventListener('click', () => {
+            tasksModal.style.display = 'flex';
+        });
+        closeTasksModal.addEventListener('click', () => {
+            tasksModal.style.display = 'none';
+        });
+        // Close modal on outside click
+        tasksModal.addEventListener('click', (e) => {
+            if (e.target === tasksModal) tasksModal.style.display = 'none';
+        });
+    </script>
+    <style>
+        .modern-btn {
+            background: linear-gradient(135deg, #32cd32, #228b22);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 12px 36px;
+            margin: 8px 6px 0 6px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(34, 139, 34, 0.6);
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .modern-btn:hover {
+            background: linear-gradient(135deg, #228b22, #32cd32);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(34, 139, 34, 0.8);
+        }
+        .play-btn {
+            background: linear-gradient(135deg, #00b894, #019875);
+        }
+        .play-btn:hover {
+            background: linear-gradient(135deg, #019875, #00b894);
+        }
+        .exit-btn {
+            background: linear-gradient(135deg, #d63031, #b71c1c);
+        }
+        .exit-btn:hover {
+            background: linear-gradient(135deg, #b71c1c, #d63031);
+        }
+    </style>
+    <script>
+        document.getElementById('play-btn').addEventListener('click', function() {
+            window.location.href = "{% url 'game_ui' %}";
+        });
+        document.getElementById('exit-btn').addEventListener('click', function() {
+            window.location.href = "{% url 'home' %}";
+        });
+    </script>
 </body>
 </html>

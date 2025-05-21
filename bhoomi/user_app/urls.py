@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import (home,signup, profile, update_profile, delete_profile, 
-                    bin_manager, risk_alerts, eco_cleanup, collector_profile, admin_dashboard)  # Import the signup view
+                    bin_manager, risk_alerts, eco_cleanup, collector_profile, admin_dashboard, game_ui)  # Import the signup view
 
 urlpatterns = [
     # ... other URL patterns ...
@@ -14,6 +14,7 @@ urlpatterns = [
     path('risk-alerts/', risk_alerts, name='risk_alerts'),  # Add this
     path('eco-cleanup/', eco_cleanup, name='eco_cleanup'),
     path('collector-profile/', collector_profile, name='collector_profile'),
+    path('game-ui/', game_ui, name='game_ui'),
 
     path('admin-dashboard/', admin_dashboard, name='admin_dashboard'),
 ]

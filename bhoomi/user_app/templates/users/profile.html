@@ -8,8 +8,22 @@
     <h2>My Profile</h2>
     <p>Username: {{ user.username }}</p>
     <p>Email: {{ user.email }}</p>
+    {% if profile %}
+        <p>User ID: {{ profile.unique_user_id }}</p>
+        <p>Contact Number: {{ profile.contact_number }}</p>
+        <p>District: {{ profile.district }}</p>
+        <p>Province: {{ profile.province }}</p>
+    {% else %}
+        <p>User ID: Not assigned</p>
+        <p>Contact Number: Not provided</p>
+        <p>District: Not provided</p>
+        <p>Province: Not provided</p>
+    {% endif %}
     <a href="{% url 'update_profile' %}">Edit Profile</a> | 
     <a href="{% url 'delete_profile' %}">Delete Account</a> | 
-    <a href="{% url 'logout' %}">Log Out</a>
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" style="background:none; border:none; padding:0; font: inherit; color: blue; cursor: pointer; text-decoration: underline;">Log Out</button>
+    </form>
 </body>
 </html>
