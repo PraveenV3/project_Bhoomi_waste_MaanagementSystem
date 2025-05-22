@@ -47,6 +47,9 @@ class UserProfile(models.Model):
     province = models.CharField(max_length=50, choices=PROVINCE_CHOICES, blank=True)
     unique_user_id = models.CharField(max_length=20, unique=True, blank=True, null=True)
 
+    points = models.IntegerField(default=0)
+    level = models.IntegerField(default=1)
+
     def save(self, *args, **kwargs):
         if not self.unique_user_id:
             import uuid
